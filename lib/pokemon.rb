@@ -30,10 +30,12 @@ class Pokemon
       # binding.pry
       # self.new(id:row[0], name:row[1], type:row[2], db:db)
       self.new(id:row[0], name:row[1], type:row[2], db:db, hp:row[3])
+      binding.pry
   end
 
   def alter_hp(new_hp, db)
     @hp = new_hp
     db.execute("UPDATE pokemon SET hp = ? WHERE id =?", new_hp, self.id)
+    binding.pry
   end
 end
