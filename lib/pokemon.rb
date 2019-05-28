@@ -25,15 +25,15 @@ class Pokemon
       FROM pokemon
       WHERE id = ?
     SQL
-    db.execute(sql, id).collect do |row|
+      # db.execute(sql, id).collect do |row|
+      row = db.execute(sql, id)[0]
       # binding.pry
-      self.new(id:row[0], name:row[1], type:row[2], db:db)
-    end.first
+      # self.new(id:row[0], name:row[1], type:row[2], db:db)
+      self.new(id:row[0], name:row[1], type:row[2], db:db, hp:row[3])
   end
 
   def alter_hp(new_hp, db)
     @hp = new_hp
-    binding.pry
     db.execute("UPDATE pokemon SET hp = ? WHERE id =?", new_hp, self.id)
   end
 end
